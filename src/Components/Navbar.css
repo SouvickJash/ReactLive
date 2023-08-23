@@ -1,0 +1,31 @@
+.nav-link{
+   position: relative;
+   /* font-size: 20px !important; */
+   /* color: white !important; */
+   /* font-family: "Ubuntu Mono"; */
+}
+.nav-link22{
+   position: relative;
+}
+.nav-link::after{
+   content: '';
+   position: absolute;
+   bottom: 4px;
+   left: 10%;
+   width: 80%;
+   height: 3px;
+   background-color: rgb(45, 97, 219);
+   transform: scaleX(0);
+   transform-origin: right;
+   transition: transform ease-in-out 0.4s;
+}
+.nav-link:hover::after{
+   transform: scaleX(1);
+   transform-origin: left;
+}
+.nav-link11:Link{
+   text-decoration: none;
+}
+.navbar-expand-lg{
+   background-color: rgb(190, 189, 189);
+}
