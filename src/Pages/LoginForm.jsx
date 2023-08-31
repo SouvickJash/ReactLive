@@ -101,13 +101,6 @@ export default function LoginForm() {
                   Show Password
                 </label>
               </div>
-              {/* <Recaptcha
-                sitekey="6LdpIoYnAAAAANg9GRKkDgP8VMMbPzz5DPv4Lyeb"
-                render="explicit"
-                verifyCallback={verifyCallback}
-                onloadCallback={callback}
-              /> */}
-              
               {/* recaptche */}
               <div className="g-recaptcha" data-sitekey="6Lct6IwUAAAAAORgCTFdJqz3smBVu8JTZPW2R9mn" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"><div style={{width: 304, height: 78}}><div><iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=1&k=6Lct6IwUAAAAAORgCTFdJqz3smBVu8JTZPW2R9mn&co=aHR0cHM6Ly93ZWJ0aGVtZXouY29tOjQ0Mw..&hl=en&v=QybaJej5brGL8d7EvWmfKMZU&size=normal&cb=mj58891jwp0q" width={304} height={78} role="presentation" frameBorder={0} scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox" /></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" className="g-recaptcha-response" style={{width: 250, height: 40, border: '1px solid rgb(193, 193, 193)', margin: '10px 25px', padding: 0, resize: 'none', display: 'none'}} defaultValue={""} /></div><iframe style={{display: 'none'}} /></div>
              

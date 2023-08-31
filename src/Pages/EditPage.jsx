@@ -4,26 +4,46 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import leftarrow from "../Image/left-arrow.svg";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  console.log(state);
+  console.log("edit details", state);
   const [name1, setName] = useState(state.name);
   const [email1, setEmail] = useState(state.email);
-  const[address,setAddress]=useState(state.address)
-  const[age1,setAge]=useState(state.age)
-  // const [phone1, setPhone] = useState(state.phone);
+  const [address, setAddress] = useState(state.address);
+  const [age1, setAge] = useState(state.age);
+ 
 
-  function submitdata1() {
-    const data = {
-      name: name1,
-      email: email1,
+const submitdata1=async(e)=> {
+  e.preventDefault();
+  console.log("address1",address);
+    const obj = {
       address:address,
+      name:name1,
       age:age1
-      // phone: phone1,
     };
-    console.log("alldata", data);
+    console.log("alldata", obj);
+    
+   await axios
+      .post(`/updatedata/${state.id}`, obj)
+      .then((response) => {
+        console.log("response", response);
+        if (response.data.status === 200) {
+          toast.success(response.data.message);
+          navigate("/");
+          console.log("data",response.data.newdata);
+        } else if (response.data.status === 404) {
+          toast.error(response.data.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err);
+      });
   }
   return (
     <>
@@ -60,6 +80,7 @@ const EditPage = () => {
                   id="first_name"
                   placeholder="Name"
                   value={name1}
+                  defaultValue={state.name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
@@ -73,7 +94,9 @@ const EditPage = () => {
                   id="email"
                   placeholder="Email"
                   value={email1}
+                  defaultValue={state.email}
                   onChange={(e) => setEmail(e.target.value)}
+                  readOnly
                 />
               </div>
 
@@ -83,9 +106,10 @@ const EditPage = () => {
                   type="text"
                   name=""
                   class="form-control"
-                  id="email"
+                  id="address"
                   placeholder="Address"
                   value={address}
+                  defaultValue={state.address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
               </div>
@@ -96,14 +120,12 @@ const EditPage = () => {
                   name=""
                   class="form-control"
                   id="email"
-                  placeholder="Address"
+                  placeholder="Age"
                   value={age1}
+                  defaultValue={state.age}
                   onChange={(e) => setAge(e.target.value)}
                 />
               </div>
-
-
-
 
               <div className="text-left">
                 <button
@@ -115,12 +137,6 @@ const EditPage = () => {
                 </button>
               </div>
             </form>
-
-            
-       
-
-
-
           </div>
         </div>
         {/* <div class='child'>child 2</div> */}

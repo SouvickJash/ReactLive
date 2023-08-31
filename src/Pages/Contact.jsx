@@ -28,11 +28,6 @@ const Contact = () => {
 
 const submitData=async(e)=>{
   e.preventDefault();
-  // if (Name === '') {
-  //   toast.error("Enter your name");
-  // }if(Email===''){
-  //   toast.error("Please enter valid email")
-  // }
   var obj={
     "name":Name,
     "email":Email,
@@ -46,11 +41,16 @@ console.log("value",obj);
 await axios.post("/insert",obj)
 .then((response) => {
   console.log("response",response);
-  if(response.data.status===201){
+  
+  if (response.data.status === 201) {
     toast.success(response.data.message);
-    // navigate("/");
-  }else if(response.data.status===404){
-    toast.error(response.data.message);
+    // toast.success("success")
+    navigate("/");
+    
+  } else if (response.status === 404) {
+    
+    // toast.error(response.status);
+    toast.error("fail")
   }
  
 }).catch((err)=>{
@@ -67,9 +67,6 @@ await axios.post("/insert",obj)
       <NavLink className="nav-link" to='/'>
       <caption><img src={leftarrow} alt="" width="40" height="40" onClick={() => navigate(-1)} style={{marginLeft: 1, marginBottom:10}}/></caption>
       </NavLink>
-
-      
-
 
 <div class="flex-parent-element">
   <div class="flex-child-element magenta">

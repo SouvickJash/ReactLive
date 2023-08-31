@@ -8,14 +8,19 @@ import addicon from "../Image/addicon.svg";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ReactSearchBox from "react-search-box";
+// import SweetAlertComponent from "./SwiteAlert";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Css/Style.css"
 
+const deleteapi='http://localhost:8000/deletedata';  //delete api 
+
 const NodeData = () => {
   const [backendData, setBackendData] = useState([{}]);
   const [user, setUser] = useState([]);
-  const[loading,setLoading]=useState(true)
+  // const [deleteid, setDeleteId] = useState();
+  // const [popup,setpopup] = useState(false);
+  // const[loading,setLoading]=useState(true)
   const navigate = useNavigate();
 
   const getApi = async () => {
@@ -50,7 +55,7 @@ const NodeData = () => {
   //Edit function
   function Edit(_id, n, e, a, age) {
     console.log(`id:${_id} name:${n} email:${e} adress:${a} age:${age}`);
-
+    
     navigate("/editpage", {
       state: {
         id:_id,
@@ -61,26 +66,42 @@ const NodeData = () => {
       },
     });
   }
-// delete
-function example(n) {
-   console.log(`Deleted id: ${n}`);
-   // alert(`DATA DELETEED ID NUMBER: ${n}`);
-   toast.success("Delete Successfully");
+
+  const example = async id => {
+    if (window.confirm('You want to delete ?')) {
+      await deleteUser(id)
+      toast.success("Data deleted successfully.....");
+      getApi();
+     }else{
+      
+     }
+
  }
 
+   const deleteUser = async id => {
+    try {
+        return await axios.post(`${deleteapi}/${id}`)
+    }
+    catch (error) {
+        console.log('Error while calling deleteUser API', error.message)
+    }
+}
+
+
+
 //loading
-setTimeout(() => {
-   setLoading(false);
- }, 800);
- if (loading) {
-   return (
-     <>
-       <div class="spinner-border text-primary" role="status">
-         <span class="sr-only">Loading...</span>
-       </div>
-     </>
-   );
- }
+// setTimeout(() => {
+//    setLoading(false);
+//  }, 800);
+//  if (loading) {
+//    return (
+//      <>
+//        <div class="spinner-border text-primary" role="status">
+//          <span class="sr-only">Loading...</span>
+//        </div>
+//      </>
+//    );
+//  }
   return (
     <>
       <p>{user}</p>
@@ -195,6 +216,7 @@ setTimeout(() => {
           );
         })}
       </table>
+
       <ToastContainer />
     </>
   );
