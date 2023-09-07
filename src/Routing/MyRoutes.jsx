@@ -15,6 +15,8 @@ import Footer from "../Components/Footer";
 import Light from "../Pages/Light";
 import Connect from "../Pages/Connect";
 import NodeData from "../Pages/NodeData"
+import Register from "../Pages/Register";
+import RegData from "../Pages/RegData";
 
 
 
@@ -37,6 +39,8 @@ const MyRoutes = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/light" element={<Light />} />
           <Route path="/connect" element={<Connect/>}/>
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/regdata" element={<RegData/>}/>
           
         </Routes>
         <Footer/>

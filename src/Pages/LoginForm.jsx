@@ -115,7 +115,7 @@ export default function LoginForm() {
               </div>
               <div className="text-center">
                 <p>
-                  Don't have account? <Link to="/contact">Register</Link>
+                  Don't have account? <Link to="/register">Register</Link>
                 </p>
               </div>
             </form>

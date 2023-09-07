@@ -1,5 +1,8 @@
 .nav-link{
    position: relative;
+   /* position: absolute; */
+   text-decoration: none;
+   /* display: block; */
    /* font-size: 20px !important; */
    /* color: white !important; */
    /* font-family: "Ubuntu Mono"; */
@@ -27,5 +30,5 @@
    text-decoration: none;
 }
 .navbar-expand-lg{
-   background-color: rgb(190, 189, 189);
+   background-color: rgb(226, 223, 223);
 }

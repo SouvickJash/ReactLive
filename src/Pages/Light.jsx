@@ -1,29 +1,31 @@
-import React, { useState } from 'react'
-import lit from '../Image/light.png' 
+// import React, { useState } from 'react'
+// import lit from '../Image/light.png' 
+// import  lit1 from '../Image/23.jpg'
 
-const Light = () => {
-   const[light,setLight]=useState(false)
-   const fun1=()=>{
-      if(light !== true){
-         setLight(true)
-      }else{
-         setLight(false)
-      }
-   }
-  return (
-    <>
-      <img src={lit} alt="" width="50%" height="50%"/>
-      <button  onClick={fun1}>click</button>
+// const Light = () => {
+//    const[light,setLight]=useState(lit)
+//    const fun1=()=>{
+//       if(light !== lit){
+//          setLight(lit)
+//       }else{
+//          setLight(lit1)
+//       }
+//    }
+//   return (
+//     <>
+//       <img src={light} alt="" width="50%" height="50%"/>
+//       <button  onClick={fun1}>click</button>
       
-    </>
-  )
-}
+//     </>
+//   )
+// }
 
-export default Light
+// export default Light
 
 
 // import React from 'react'
 // import light from '../Image/light.png' 
+// import  light1 from '../Image/23.jpg'
 // import  { useState } from 'react';
 // import './light.css'
 
@@ -35,7 +37,8 @@ export default Light
 
 //   return (
 //     <>
-//       <img src={light} alt="" className='light'/>
+//       <img src={on} alt="" className='light'/>
+    
 //       <div className={on ? 'bulb-on' : 'bulb-off'} />
 //       <button onClick={lightOn}>On</button>
 //       <button onClick={lightOff}>Off</button>
