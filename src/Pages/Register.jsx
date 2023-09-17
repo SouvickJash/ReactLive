@@ -29,16 +29,18 @@ const Register = () => {
         "confpassword":confpassword
     }
     console.log("value",obj);
-    
-    
-    await axios.post("/insertdata",obj)
+    if(Password!==confpassword){
+      toast.error("password and confpassword are not matched")
+   }
+   else{
+    await axios.post("/registedata",obj)
     .then((response) => {
       console.log("response",response);
       
       if (response.data.status === 201) {
         toast.success(response.data.message);
         // toast.success("success")
-        navigate("/regdata");
+        // navigate("/regdata");
         
       } else if (response.status === 404) {
         
@@ -50,9 +52,11 @@ const Register = () => {
       console.log(err);
       toast.error(err);
     });
-      // else {
-      //   toast.success("okkkkkk");
-      // }
+   }
+
+    
+    
+
     }
   return (
     <>

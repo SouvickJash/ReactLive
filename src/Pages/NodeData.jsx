@@ -11,17 +11,28 @@ import ReactSearchBox from "react-search-box";
 // import SweetAlertComponent from "./SwiteAlert";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../Css/Style.css"
+import "../Css/Style.css";
 
-const deleteapi='http://localhost:8000/deletedata';  //delete api 
+const deleteapi = "http://localhost:8000/deletedata"; //delete api
 
 const NodeData = () => {
   const [backendData, setBackendData] = useState([{}]);
   const [user, setUser] = useState([]);
+  const [search, setSearch] = useState();
   // const [deleteid, setDeleteId] = useState();
   // const [popup,setpopup] = useState(false);
   // const[loading,setLoading]=useState(true)
+
   const navigate = useNavigate();
+
+  const Searchdata = async () => {
+    const res = await axios.get(`/searchletter/${search}`);
+    // setUser(res?.data);
+    setBackendData(res?.data);
+    console.log("data",setBackendData);
+    // console.log("data+++", res.data);
+    // alert(search)
+  };
 
   const getApi = async () => {
     const response = await axios.get("/getlastdata");
@@ -39,7 +50,6 @@ const NodeData = () => {
   //
   // view
   function View(_id, n, e, a, age) {
-   
     console.log(`id:${_id} name:${n} email:${e} adress:${a} age:${age}`);
     toast.success("View Successfully");
     navigate("/viewpage", {
@@ -55,10 +65,10 @@ const NodeData = () => {
   //Edit function
   function Edit(_id, n, e, a, age) {
     console.log(`id:${_id} name:${n} email:${e} adress:${a} age:${age}`);
-    
+
     navigate("/editpage", {
       state: {
-        id:_id,
+        id: _id,
         name: n,
         email: e,
         address: a,
@@ -67,41 +77,36 @@ const NodeData = () => {
     });
   }
 
-  const example = async id => {
-    if (window.confirm('You want to delete ?')) {
-      await deleteUser(id)
+  const example = async (id) => {
+    if (window.confirm("You want to delete ?")) {
+      await deleteUser(id);
       toast.success("Data deleted successfully.....");
       getApi();
-     }else{
-      
-     }
+    } else {
+    }
+  };
 
- }
-
-   const deleteUser = async id => {
+  const deleteUser = async (id) => {
     try {
-        return await axios.post(`${deleteapi}/${id}`)
+      return await axios.post(`${deleteapi}/${id}`);
+    } catch (error) {
+      console.log("Error while calling deleteUser API", error.message);
     }
-    catch (error) {
-        console.log('Error while calling deleteUser API', error.message)
-    }
-}
+  };
 
-
-
-//loading
-// setTimeout(() => {
-//    setLoading(false);
-//  }, 800);
-//  if (loading) {
-//    return (
-//      <>
-//        <div class="spinner-border text-primary" role="status">
-//          <span class="sr-only">Loading...</span>
-//        </div>
-//      </>
-//    );
-//  }
+  //loading
+  // setTimeout(() => {
+  //    setLoading(false);
+  //  }, 800);
+  //  if (loading) {
+  //    return (
+  //      <>
+  //        <div class="spinner-border text-primary" role="status">
+  //          <span class="sr-only">Loading...</span>
+  //        </div>
+  //      </>
+  //    );
+  //  }
   return (
     <>
       <p>{user}</p>
@@ -117,20 +122,31 @@ const NodeData = () => {
         </caption>
       </NavLink>
       <div className="ss">
-        <ReactSearchBox
+        {/* <ReactSearchBox
           placeholder="Search "
           value="Doe"
           onChange={handleChange}
-          //   data={data}
           callback={(record) => console.log(record)}
-          // width="60%"
+        /> */}
+         <input
+          type="Address"
+          className="form-control"
+          placeholder="Search here"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
+      
+        <button type="button" class="btn btn-danger" onClick={Searchdata}>
+          Search
+        </button>
       </div>
       <table className="backenddata">
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col" className="name">NAME</th>
+            <th scope="col" className="name">
+              NAME
+            </th>
             <th scope="col">EMAIL</th>
             <th scope="col">ADDRESS</th>
             <th scope="col">AGE</th>
@@ -204,7 +220,7 @@ const NodeData = () => {
                     <img
                       src={d1}
                       alt=""
-                       onClick={() => example(item._id)}
+                      onClick={() => example(item._id)}
                       width="20"
                       height="20"
                       margin-left="15px"

@@ -1,3 +1,4 @@
+//right
 // import React, { useState } from 'react'
 // import lit from '../Image/light.png' 
 // import  lit1 from '../Image/23.jpg'
